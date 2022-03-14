@@ -7,7 +7,7 @@
 	'maintainer': 'Centrics Business Solutions',
 	'company': 'Centrics Business Solutions',
 	'website': 'http://www.centrics.cloud/',
-	'depends': ['account'],
+	'depends': ['sale', 'account'],
 	'data': [
         'views/inherit_tax_view.xml',
         'views/inherit_customer_view.xml',
