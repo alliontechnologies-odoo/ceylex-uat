@@ -95,32 +95,39 @@
 
 
         <record id="desc_prod_service" model="rating.description">
-            <field name="name">Engineering Competence &amp; Technical complience</field>
+            <field name="name">Technical complience</field>
+            <field name="description">Engineering Competence &amp; Technical complience</field>
             <field name="category_id" ref="ceylex_reports.cat_technical_eval"/>
         </record>
         <record id="desc_engineering" model="rating.description">
-            <field name="name">a.  Similar field            -No of Years ……..
+            <field name="name">Similar Products</field>
+            <field name="description">a.  Similar field            -No of Years ……..
                 b. Similar product/service/system-No of years….</field>
             <field name="category_id" ref="ceylex_reports.cat_experience"/>
         </record>
         <record id="desc_iso9001" model="rating.description">
             <field name="name">ISO 9001</field>
+            <field name="description">ISO 9001</field>
             <field name="category_id" ref="ceylex_reports.cat_quality"/>
         </record>
         <record id="desc_iso14001" model="rating.description">
             <field name="name">ISO 14001</field>
+            <field name="description">ISO 14001</field>
             <field name="category_id" ref="ceylex_reports.cat_quality"/>
         </record>
         <record id="desc_iso45001" model="rating.description">
             <field name="name">ISO 45001</field>
+            <field name="description">ISO 45001</field>
             <field name="category_id" ref="ceylex_reports.cat_quality"/>
         </record>
         <record id="desc_free_supply" model="rating.description">
             <field name="name">Defects free supply</field>
+            <field name="description">Defects free supply</field>
             <field name="category_id" ref="ceylex_reports.cat_relationship"/>
         </record>
         <record id="desc_on_time_delivery" model="rating.description">
             <field name="name">On time Deliveries</field>
+            <field name="description">On time Deliveries</field>
             <field name="category_id" ref="ceylex_reports.cat_relationship"/>
         </record>
     </data>
