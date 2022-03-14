@@ -1,0 +1,90 @@
+<odoo >
+
+<!--    Uom category-->
+    <record id="ceylex_uom_category_power" model="uom.category">
+        <field name="name">Power</field>
+    </record>
+
+    <record id="ceylex_uom_category_energy" model="uom.category">
+        <field name="name">Energy</field>
+    </record>
+    <record id="ceylex_uom_category_temperature" model="uom.category">
+        <field name="name">Temperature</field>
+    </record>
+    <record id="ceylex_uom_category_energy_square" model="uom.category">
+        <field name="name">Energy square</field>
+    </record>
+    <record id="ceylex_uom_category_percentage" model="uom.category">
+        <field name="name">Percentage</field>
+    </record>
+
+
+    <!-- Units -->
+
+
+    <record id="product_uom_kw" model="uom.uom">
+        <field name="name">kW</field>
+        <field name="category_id" ref="ceylex_uom_category_power"/>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
+
+    <record id="product_uom_mw" model="uom.uom">
+        <field name="category_id" ref="ceylex_uom_category_power"/>
+        <field name="name">MW</field>
+        <field name="factor" eval="1000.00"/>
+        <field name="uom_type">bigger</field>
+    </record>
+    <record id="product_uom_w" model="uom.uom">
+        <field name="name">W</field>
+        <field name="category_id" ref="ceylex_uom_category_power"/>
+        <field name="factor" eval="1000"/>
+        <field name="uom_type">smaller</field>
+    </record>
+
+
+
+    <record id="product_uom_kwh" model="uom.uom">
+        <field name="category_id" ref="ceylex_uom_category_energy"/>
+        <field name="name">kWh</field>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
+
+    <record id="product_uom_mwh" model="uom.uom">
+        <field name="category_id" ref="ceylex_uom_category_energy"/>
+        <field name="name">MWh</field>
+        <field name="factor" eval="1000.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
+
+    <record id="product_uom_wh" model="uom.uom">
+        <field name="name">Wh</field>
+        <field name="category_id" ref="ceylex_uom_category_energy"/>
+        <field name="factor" eval="1000"/>
+        <field name="uom_type">smaller</field>
+    </record>
+
+
+    <record id="product_uom_celsius" model="uom.uom">
+        <field name="category_id" ref="ceylex_uom_category_temperature"/>
+        <field name="name">°C</field>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
+
+
+    <record id="product_uom_kwm" model="uom.uom">
+        <field name="category_id" ref="ceylex_uom_category_energy_square"/>
+        <field name="name">kW/m²</field>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
+
+    <record id="product_uom_percentage" model="uom.uom">
+        <field name="category_id" ref="ceylex_uom_category_percentage"/>
+        <field name="name">%</field>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
+</odoo>

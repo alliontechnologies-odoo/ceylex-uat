@@ -1,0 +1,125 @@
+<odoo>
+    <data>
+
+        <template id="report_budget_report_ceylex_document" >
+
+            <div class="header" style="">
+                <br/>
+                <h4 t-esc="o.name" />
+            </div>
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size:12px;">
+                <br/>
+                <table class="border border-dark mt-5" style="width:100%; margin-top:20px">
+                    <thead>
+                        <tr class="border-bottom">
+                            <th class="border-right text-center" style="width:5%">Item</th>
+                            <th class="border-right text-center" style="width:35%">Description</th>
+                            <th class="border-right text-center" style="width:10%">Unit</th>
+                            <th class="border-right text-center" style="width:10%">Quantity</th>
+                            <th class="border-right text-center" style="width:10%">Currency</th>
+                            <th class="border-right text-center" style="width:10%">Unit Price</th>
+                            <th class="border-right text-center" style="width:10%">Total</th>
+                            <th class="border-right text-center" style="width:10%">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="num" t-value="1"/>
+                        <t t-set="parent" t-value=""/>
+                        <t t-set="task_total" t-value="0.00"/>
+                        <t t-set="quantity" t-value="0.00"/>
+                        <t t-set="total_unit" t-value="0.00"/>
+                        <t t-set="project_total" t-value="0.00"/>
+                        <t t-foreach="o.crossovered_budget_line.sorted(key=lambda x: x.general_budget_id.parent_id)" t-as="line">
+                            <t t-if="line.general_budget_id.parent_id.id != parent">
+                                <tr t-if="num != 1">
+                                    <td class="border-right border-bottom text-center"/>
+                                    <td class="border-right border-bottom text-left"> Subtotal </td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-right"><t t-esc="'%0.2f' % task_total"/></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                </tr>
+
+                                <tr>
+                                   <td class="border-right border-bottom text-right"> <t t-esc="num"/> </td>
+                                   <td class="border-right border-bottom text-left"> <t t-esc="line.general_budget_id.parent_id.name"/> </td>
+                                   <td class="border-right border-bottom text-center"/>
+                                   <td class="border-right border-bottom text-center"/>
+                                   <td class="border-right border-bottom text-center"/>
+                                   <td class="border-right border-bottom text-center"/>
+                                   <td class="border-right border-bottom text-center"/>
+                                   <td class="border-right border-bottom text-center"/>
+                                </tr>
+
+                                <t t-set="task_total" t-value="0.00"/>
+                                <t t-set="num" t-value="num+1"/>
+                            </t>
+
+                            <tr>
+                                <td class="border-right border-bottom text-center"/>
+                                <td class="border-right border-bottom text-left"> <t t-esc="line.general_budget_id.name"/> </td>
+                                <td class="border-right border-bottom text-center"><t t-esc="line.uom_id.name"/></td>
+                                <td class="border-right border-bottom text-center"><t t-esc="line.quantity"/></td>
+                                <td class="border-right border-bottom text-center"><t t-esc="line.currency_id.name"/></td>
+                                <td class="border-right border-bottom text-right"><t t-esc="'%0.2f' % line.unit_price"/></td>
+                                <td class="border-right border-bottom text-right"><t t-esc="'%0.2f' % line.practical_amount"/></td>
+                                <td class="border-right border-bottom text-center"><t t-esc="line.remarks"/></td>
+                            </tr>
+                            <t t-set="total_unit" t-value="total_unit + line.unit_price"/>
+                            <t t-set="quantity" t-value="quantity + line.quantity"/>
+                            <t t-set="task_total" t-value="task_total + line.practical_amount"/>
+                            <t t-set="project_total" t-value="project_total + line.practical_amount"/>
+                            <t t-set="parent" t-value="line.general_budget_id.parent_id.id"/>
+                        </t>
+                        <tr >
+                                    <td class="border-right border-bottom text-center"/>
+                                    <td class="border-right border-bottom text-left"> Subtotal </td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                                    <td class="border-right border-bottom text-right"></td>
+                                    <td class="border-right border-bottom text-right"><t t-esc="'%0.2f' % (task_total)"/></td>
+                                    <td class="border-right border-bottom text-center"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="border-right border-bottom text-center"/>
+                            <td class="border-right border-bottom text-left"> <strong>Total Project Cost</strong> </td>
+                            <td class="border-right border-bottom text-center"/>
+                            <td class="border-right border-bottom text-center"><t t-esc="quantity"/></td>
+                            <td class="border-right border-bottom text-center"/>
+                            <td class="border-right border-bottom text-right"><t t-esc="'%0.2f' % total_unit"/></td>
+                            <td class="border-right border-bottom text-right"><t t-esc="'%0.2f' %  project_total"/></td>
+                            <td class="border-right border-bottom text-center"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+
+
+        <template id="report_budget_report_ceylex">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                  <t t-call="ceylex_reports.report_budget_report_ceylex_document" t-lang="o.user_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_report_budget_report" model="ir.actions.report">
+            <field name="name">Budget Report</field>
+            <field name="model">crossovered.budget</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ceylex_reports.report_budget_report_ceylex</field>
+            <field name="report_file">ceylex_reports.report_budget_report_ceylex</field>
+            <field name="print_report_name">
+                '%s' % (object.name)</field>
+            <field name="binding_model_id" ref="account_budget.model_crossovered_budget"/>
+            <field name="paperformat_id" ref="ceylex_reports.ceylex_a4_format_no_margin"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_delivery_period,access.purchase.delivery.period,model_purchase_delivery_period,,1,1,1,1
+access_purchase_delivery_term,access.purchase.delivery.terms,model_purchase_delivery_term,,1,1,1,1

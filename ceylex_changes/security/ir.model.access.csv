@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_meter_reading,access.meter.reading,model_meter_reading,,1,1,1,1
+access_meter_reading_line,access.meter.reading.line,model_meter_reading_lines,,1,1,1,0
+access_meter_reading_type,access.meter.reading.type,model_meter_reading_types,,1,1,1,1

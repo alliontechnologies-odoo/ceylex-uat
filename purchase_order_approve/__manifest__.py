@@ -1,0 +1,25 @@
+{
+    'name': 'Purchase orderApprove',
+    'version': '1.0',
+    'sequence': 1,
+    'author': "Centrics Business Solutions (Pvt) Ltd",
+    'website': 'http://www.centrics.cloud/',
+    'summary': 'Purchase order Approve',
+    'description': """Purchase order Approve""",
+    'depends': [
+        'base',
+        'account',
+        'purchase',
+    ],
+    'data': [
+        'data/mail_template.xml',
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'wizard/purchase_order_approval_user_view.xml',
+        'wizard/purchase_order_approve_reject_comment.xml',
+        'views/purchase_order_view.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

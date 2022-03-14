@@ -1,0 +1,16 @@
+<odoo>
+    <record id="crossovered_budget_view_form_form_inherit_ceylax" model="ir.ui.view">
+        <field name="name">crossovered.budgetr.form.inherit.ceylex</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='crossovered_budget_line']/tree/field[@name='theoritical_amount']" position="before">
+                <field name="committed_expenditure"/>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/form/group/group/field[@name='planned_amount']" position="after">
+                <field name="committed_expenditure"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

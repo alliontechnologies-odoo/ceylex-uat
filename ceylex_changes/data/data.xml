@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="meter_input_type_day" model="meter.reading.types">
+            <field name="name">Day</field>
+        </record>
+        <record id="meter_input_type_peak" model="meter.reading.types">
+            <field name="name">Peak</field>
+        </record>
+        <record id="meter_input_type_off_peak" model="meter.reading.types">
+            <field name="name">Off Peak</field>
+        </record>
+    </data>
+</odoo>

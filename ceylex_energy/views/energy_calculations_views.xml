@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_energy_calculation_form" model="ir.ui.view">
+        <field name="name">energy.calculation.form</field>
+        <field name="model">energy.calculation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="get_input_lines" type="object" string="Get Inputs" class="btn-primary"  attrs="{'invisible':[('state','=', 'confirmed')]}"/>
+                    <button name="get_result_lines" type="object" string="Get Results" class="btn-primary"  attrs="{'invisible':[('state','=', 'confirmed')]}"/>
+                    <button name="button_confirm" type="object" string="Confirm" class="oe_highlights" attrs="{'invisible':[('state','=', 'confirmed')]}"/>
+                    <button name="button_set_to_draft" type="object" string="Set To Draft" class="btn-primary" groups="ceylex_energy.ceylex_calculations_set_to_draft" attrs="{'invisible':[('state','!=', 'confirmed')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="month" string="Reference Period" invisible="0"/>
+                               <div invisible="0">
+                                   <field name="month" class="oe_inline col-sm-5"/>
+                                   - <field name="year" class="oe_inline col-sm-5"/>
+                               </div>
+                            <field name="start_date" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+                            <field name="company_id" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+                            <field name="installed_capacity" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+                            <field name="hours_in_day" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+
+                        </group>
+                        <group>
+                            <field name="end_date" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+                            <field name="power_source_id" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+                            <field name="operational_period" readonly="1" />
+                            <field name="total_hours" readonly="1"/>
+                        </group>
+                        <label for="summery" string="Plant operation summary for the month" />
+                        <field name="summery" attrs="{'readonly':[('state','=', 'confirmed')]}"/>
+                    </group>
+                    <notebook>
+                        <page string=" Energy Inputs">
+                            <field name="calculations_input_ids" attrs="{'readonly':[('state','=', 'confirmed')]}">
+                                <tree editable="top">
+                                    <field name="calculations_input_ids" readonly="1"/>
+                                    <field name="code" readonly="1"/>
+                                    <field name="uom_id" readonly="1"/>
+                                    <field name="amount"/>
+                                    <field name="calculations_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string=" Energy Results">
+                            <field name="calculations_result_ids" attrs="{'readonly':[('state','=', 'confirmed')]}">
+                                <tree editable="top">
+                                    <field name="name" readonly="1"/>
+                                    <field name="uom_id" readonly="1"/>
+                                    <field name="amount"/>
+                                    <field name="calculations_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_energy_calculation_tree" model="ir.ui.view">
+        <field name="name">energy.calculation.tree</field>
+        <field name="model">energy.calculation</field>
+        <field name="arch" type="xml">
+            <tree string="Power Sources" >
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="power_source_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_energy_calculation_menu" model="ir.actions.act_window">
+            <field name="name">Energy Calculations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">energy.calculation</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!--  menu item -->
+    <menuitem name="Energy Calculation"
+            id="menu_energy_calculation"
+            parent="main_menu_ceylex"
+            action="action_energy_calculation_menu"
+            sequence="2"
+        />
+</odoo>

@@ -1,0 +1,32 @@
+<odoo>
+
+        <!-- Top menu item -->
+    <menuitem name="Ceylex Energy"
+        id="main_menu_ceylex"
+        web_icon="ceylex_energy,static/description/energy_icon.png"
+        sequence="55" />
+
+        <!--  Unit of measure item -->
+    <menuitem name="Configurations"
+            id="menu_ceylex_configurations_"
+            parent="main_menu_ceylex"
+            sequence="60"
+        />
+        <!--  Unit of measure item -->
+    <menuitem name="Unit of Measure"
+            id="menu_ceylex_uom_"
+            parent="main_menu_ceylex"
+            sequence="60"
+        />
+
+    <menuitem id="menu_stock_uom_form_action"
+              action="uom.product_uom_form_action"
+              name="UoM"
+              parent="menu_ceylex_uom_"
+              sequence="5" />
+    <menuitem
+            action="uom.product_uom_categ_form_action" id="menu_stock_uom_categ_form_action"
+            name="UoM Categories"
+            parent="menu_ceylex_uom_"
+            sequence="10"/>
+</odoo>

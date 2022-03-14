@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_supplier_rating_form" model="ir.ui.view">
+        <field name="name">supplier.rating.form</field>
+        <field name="model">supplier.rating</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" attrs="{'invisible':[('state','!=','draft')]}"/>
+                    <button name="action_approved" string="Approve" type="object" class="oe_highlight"  attrs="{'invisible':[('state','!=','confirm')]}"/>
+                    <button name="action_rejected" string="Reject" type="object" class="btn btn-danger"  attrs="{'invisible':[('state','!=','confirm')]}"/>
+                    <button name="%(ceylex_reports.action_supplier_report_menu)d" string="Print" type="action" class="btn btn-primary" attrs="{'invisible':[('state','!=','approved')]}" />
+<!--                    <button name="action_cancel" string="Reject" type="object" class="btn btn-danger" attrs="{'invisible':[('state','=','cancel')]}"/>-->
+                    <button name="action_back_to_draft" string="Set To Draft" type="object" class="oe_highlight" attrs="{'invisible':[('state','!=','reject')]}"/>
+                    <button name="action_record_revision" string="Set To Revision" type="object"  />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approved,reject"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'supplier'}" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="to_be_purchased"  attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="delivery"  attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="technical_compliance"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                            <field name="company_id" attrs="{'readonly':[('state','!=', 'draft')]}" invisible="1"/>
+                            <field name="approved_by" readonly="1" attrs="{'invisible':[('approved_by','=', False)]}"/>
+                            <field name="approved_date" readonly="1" attrs="{'invisible':[('approved_by','=', False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Capability Assessment">
+                            <field name="line_ids"  attrs="{'readonly':[('state','!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="rating_id" invisible="1"/>
+                                    <field name="sequence" readonly="1" />
+                                    <field name="category_id"/>
+                                    <field name="description_id" optional="hide"/>
+                                    <field name="description"/>
+                                    <field name="only_category" invisible="1"/>
+                                    <field name="marks" attrs="{'invisible':[('only_category', '=', True)]}" />
+                                    <field name="category_factor_id" attrs="{'invisible':[('only_category', '=', True)]}" />
+                                    <field name="weight_factor" attrs="{'invisible':[('only_category', '=', True)]}" />
+                                    <field name="score" attrs="{'invisible':[('only_category', '=', True)]}" />
+                                </tree>
+                            </field>
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <field name="total" colspan="2"  attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>
+                        </page>
+                        <page string="Remarks">
+                            <field name="remarks" />
+                        </page>
+                        <page string="Recommendation Committee:">
+                            <field name="recommendation_committee"  attrs="{'readonly':[('state','!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="job_title"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_supplier_rating_tree" model="ir.ui.view">
+        <field name="name">supplier.rating.tree</field>
+        <field name="model">supplier.rating</field>
+        <field name="arch" type="xml">
+            <tree  >
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_supplier_rating_search" model="ir.ui.view">
+        <field name="name">supplier.rating.search</field>
+        <field name="model">supplier.rating</field>
+        <field name="arch" type="xml">
+            <search string="Rating Search">
+                <field name="name" string="Name"/>
+                <field name="partner_id" string="Vendors" invisible="context.get('default_partner_id', False)"/>
+
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_supplier_rating_menu" model="ir.actions.act_window">
+            <field name="name">Supplier Ratings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">supplier.rating</field>
+            <field name="search_view_id" ref="view_supplier_rating_search"/>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem
+            id="menu_vendor_rating_list" name="Vendor Ratings"
+            parent="purchase.menu_procurement_management" action="action_supplier_rating_menu" sequence="17"/>
+
+
+    <!--    Supplier Rating Category -->
+
+    <record id="view_supplier_rating_category_form" model="ir.ui.view">
+        <field name="name">rating.description.categoryform</field>
+        <field name="model">rating.description.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Evaluation values">
+                            <field name="desc_lines">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                    <field name="category_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<!--    <record id="view_supplier_rating_category_tree" model="ir.ui.view">-->
+<!--        <field name="name">supplier.description.category.tree</field>-->
+<!--        <field name="res_model">rating.description.category</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree >-->
+<!--                <field name="name"/>-->
+<!--                <field name="sequence"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="action_energy_calculation_line_category" model="ir.actions.act_window">
+        <field name="name">Supplier Ratings Line Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rating.description.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Line description -->
+
+    <record id="action_energy_line_description" model="ir.actions.act_window">
+        <field name="name">Supplier Ratings Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rating.description</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_vendor_rating_list_config" name="Rating Configurations" parent="purchase.menu_procurement_management"  sequence="18"/>
+    <menuitem id="menu_vendor_rating_list_category" name="Rating Category" parent="menu_vendor_rating_list_config" action="action_energy_calculation_line_category"  sequence="1"/>
+    <menuitem id="menu_vendor_rating_list_description" name="Rating Description" parent="menu_vendor_rating_list_config" action="action_energy_line_description"  sequence="2"/>
+
+
+</odoo>

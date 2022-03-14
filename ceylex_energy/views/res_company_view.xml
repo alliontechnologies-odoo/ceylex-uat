@@ -1,0 +1,40 @@
+<odoo>
+    <record id="inherit_view_company_form" model="ir.ui.view">
+        <field name="name">inherit.view.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_info']" position="after">
+                <page string="Project Informations" name="project_information">
+                    <group>
+                        <group>
+                            <field name="power_source_id" />
+                            <field name="project_start_date" />
+                            <field name="commercial_opr_start_date" />
+                        </group>
+                        <group>
+                            <field name="installed_capacity" />
+                            <field name="project_end_date" />
+                            <field name="temperature_coefficient" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_res_company_search" model="ir.ui.view">
+        <field name="name">res.company.search</field>
+        <field name="model">res.company</field>
+        <field name="arch" type="xml">
+            <search string="Rating Search">
+                <field name="name" string="Company Name"/>
+                <field name="power_source_id" string="Power Source"/>
+                <group expand="0" string="Group By">
+                    <filter name="power_source_id" string="Power Source" domain="[]" context="{'group_by': 'power_source_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

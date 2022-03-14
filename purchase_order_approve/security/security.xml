@@ -1,0 +1,7 @@
+<odoo>
+    <record id="group_po_approval_security" model="res.groups">
+        <field name="name">Purchase Order Approver</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="users" eval="[(4, ref('base.user_admin'))]" />
+    </record>
+</odoo>

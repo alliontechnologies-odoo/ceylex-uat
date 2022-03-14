@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_delivery_period,access.purchase.delivery.period,model_purchase_delivery_period,,1,1,1,1
+access_purchase_delivery_term,access.purchase.delivery.terms,model_purchase_delivery_term,,1,1,1,1
+access_purchase_order_agreements,access.purchase.order.agreements,model_purchase_order_agreements,,1,1,1,1
+
+access_supplier_rating,access.supplier_rating,model_supplier_rating,,1,1,1,1
+access_supplier_rating_line,access.supplier.rating.line,model_supplier_rating_line,,1,1,1,1
+access_rating_description_category,access.rating.description.category,model_rating_description_category,,1,1,1,1
+access_rating_description_category_factor,access.rating.description.category_factor,model_rating_description_category_factor,,1,1,1,1
+access_rating_description,access.rating.description,model_rating_description,,1,1,1,1

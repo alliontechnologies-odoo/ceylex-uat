@@ -1,0 +1,127 @@
+<odoo>
+    <data>
+        <record id="cat_technical_eval" model="rating.description.category">
+            <field name="name">Technical Evaluation</field>
+            <field name="sequence">1</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Good', 'value': 5}),
+                (0, 0, {'name': 'Average', 'value': 3}),
+                (0, 0, {'name': 'Fair', 'value': 1}),
+            ]"
+            />
+        </record>
+        <record id="cat_experience" model="rating.description.category">
+            <field name="name">Experience</field>
+            <field name="sequence">2</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Well experienced', 'value': 5}),
+                (0, 0, {'name': 'average', 'value': 3}),
+                (0, 0, {'name': 'fair', 'value': 1}),
+            ]"
+            />
+        </record>
+        <record id="cat_delivery" model="rating.description.category">
+            <field name="name">Delivery (Lead Time)</field>
+            <field name="sequence">3</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Good', 'value': 5}),
+                (0, 0, {'name': 'Average', 'value': 3}),
+                (0, 0, {'name': 'Fair', 'value': 1}),
+            ]"
+            />
+        </record>
+        <record id="cat_quality" model="rating.description.category">
+            <field name="name">Quality Systems</field>
+            <field name="sequence">4</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'If available', 'value': 5}),
+                (0, 0, {'name': 'If working on a QS', 'value': 3}),
+                (0, 0, {'name': 'not available', 'value': 0}),
+            ]"
+            />
+        </record>
+        <record id="cat_market" model="rating.description.category">
+            <field name="name">Market Position</field>
+            <field name="sequence">5</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Top leaders', 'value': 5}),
+                (0, 0, {'name': 'Average', 'value': 3}),
+                (0, 0, {'name': 'Fair', 'value': 1}),
+            ]"
+            />
+        </record>
+        <record id="cat_payment" model="rating.description.category">
+            <field name="name">Payment Terms</field>
+            <field name="sequence">6</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Negotiable', 'value': 5}),
+                (0, 0, {'name': 'Non-negotiable', 'value': 1}),
+            ]"
+            />
+        </record>
+        <record id="cat_financial" model="rating.description.category">
+            <field name="name">Financial Stability of Supplier</field>
+            <field name="sequence">7</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Very Stable', 'value': 5}),
+                (0, 0, {'name': 'Average', 'value': 3}),
+                (0, 0, {'name': 'Unstable', 'value': 0}),
+            ]"
+            />
+        </record>
+
+        <record id="cat_price" model="rating.description.category">
+            <field name="name">Price</field>
+            <field name="sequence">8</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Lower price', 'value': 5}),
+                (0, 0, {'name': 'Reasonable price', 'value': 3}),
+                (0, 0, {'name': 'Expensive', 'value': 2}),
+            ]"
+            />
+        </record>
+        <record id="cat_relationship" model="rating.description.category">
+            <field name="name">Previous Relationships</field>
+            <field name="sequence">9</field>
+            <field name="desc_lines" eval="[(5, 0, 0),
+                (0, 0, {'name': 'Defects free supply', 'value': 5}),
+                (0, 0, {'name': 'Acceptable', 'value': 3}),
+                (0, 0, {'name': 'Defective', 'value': 0}),
+            ]"
+            />
+        </record>
+
+
+
+
+        <record id="desc_prod_service" model="rating.description">
+            <field name="name">Engineering Competence &amp; Technical complience</field>
+            <field name="category_id" ref="ceylex_reports.cat_technical_eval"/>
+        </record>
+        <record id="desc_engineering" model="rating.description">
+            <field name="name">a.  Similar field            -No of Years ……..
+                b. Similar product/service/system-No of years….</field>
+            <field name="category_id" ref="ceylex_reports.cat_experience"/>
+        </record>
+        <record id="desc_iso9001" model="rating.description">
+            <field name="name">ISO 9001</field>
+            <field name="category_id" ref="ceylex_reports.cat_quality"/>
+        </record>
+        <record id="desc_iso14001" model="rating.description">
+            <field name="name">ISO 14001</field>
+            <field name="category_id" ref="ceylex_reports.cat_quality"/>
+        </record>
+        <record id="desc_iso45001" model="rating.description">
+            <field name="name">ISO 45001</field>
+            <field name="category_id" ref="ceylex_reports.cat_quality"/>
+        </record>
+        <record id="desc_free_supply" model="rating.description">
+            <field name="name">Defects free supply</field>
+            <field name="category_id" ref="ceylex_reports.cat_relationship"/>
+        </record>
+        <record id="desc_on_time_delivery" model="rating.description">
+            <field name="name">On time Deliveries</field>
+            <field name="category_id" ref="ceylex_reports.cat_relationship"/>
+        </record>
+    </data>
+</odoo>

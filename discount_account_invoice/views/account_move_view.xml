@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <data>
+        <record id="inherit_account_move_form_view" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='narration']" position="replace"/>
+
+                <xpath expr="//field[@name='invoice_outstanding_credits_debits_widget']" position="after">
+                    <group colspan="3">
+                        <field name="narration" placeholder="Terms and Conditions" class="oe_inline" nolabel="1"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//group[hasclass('oe_subtotal_footer')]" position="before">
+                    <group>
+                        <field name="global_discount_type" groups="discount_account_invoice.group_order_global_discount" class="oe_inline" attrs="{'required': [('global_order_discount', '>', 0.0)], 'readonly' : [('state', 'not in', ['draft'])]}"/>
+                        <field name="global_order_discount" groups="discount_account_invoice.group_order_global_discount" class="oe_inline" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="total_global_discount" groups="discount_account_invoice.group_order_global_discount" class="oe_inline" attrs="{'invisible': ['|', ('global_discount_type', '!=', 'percent'), ('global_order_discount', '=', 0.0)]}"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='amount_residual']" position="before">
+                    <field name="total_discount" groups="product.group_discount_per_so_line,discount_account_invoice.group_order_global_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="before">
+                    <field name="discount_type" groups="product.group_discount_per_so_line" optional="show"/>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='discount']" position="attributes">
+                    <attribute name="string">Discount</attribute>
+                    <attribute name="optional">show</attribute>
+                    <attribute name="groups">product.group_discount_per_so_line</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='discount']" position="before">
+                    <field name="is_global_line" invisible="1"/>
+                    <field name="discount_type" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

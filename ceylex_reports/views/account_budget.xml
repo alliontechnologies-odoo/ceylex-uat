@@ -1,0 +1,68 @@
+<odoo>
+
+    <record model="ir.ui.view" id="view_budget_post_form_inherit">
+        <field name="name">account.budget.post.form</field>
+        <field name="model">account.budget.post</field>
+        <field name="inherit_id" ref="account_budget.view_budget_post_form"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="parent_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_budget_post_tree">
+        <field name="name">account.budget.post.tree</field>
+        <field name="model">account.budget.post</field>
+        <field name="inherit_id" ref="account_budget.view_budget_post_tree"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="parent_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_budget_post_search">
+        <field name="name">account.budget.post.search</field>
+        <field name="model">account.budget.post</field>
+        <field name="inherit_id" ref="account_budget.view_budget_post_search"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <group expand="0" string="Group By" colspan="4">
+                        <filter string="Parent Position" name="parent_id" domain="[]" context="{'group_by':'parent_id'}"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crossovered_budget_view_form_inherit">
+        <field name="name">crossovered.budget.post.form.inherit</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='crossovered_budget_line']/tree" position="replace">
+                <tree string="Budget Lines" decoration-success="is_above_budget and planned_amount &gt; 0" decoration-danger="is_above_budget and planned_amount &lt; 0" editable="bottom">
+                    <field name="general_budget_id" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" />
+                    <field name="analytic_account_id" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting" optional="show"/>
+                    <field name="date_from" optional="hide"/>
+                    <field name="date_to" optional="hide"/>
+                    <field name="uom_id" optional="show"/>
+                    <field name="quantity" optional="show"/>
+                    <field name="paid_date" groups="base.group_no_one" optional="hide"/>
+                    <field name="unit_price" optional="show"/>
+                    <field name="currency_id" optional="show"/>
+                    <field name="planned_amount" sum="Planned Amount" optional="show"/>
+                    <field name="practical_amount" sum="Practical Amount" optional="show"/>
+                    <field name="committed_expenditure" sum="Committed Expenditure" optional="show"/>
+                    <field name="theoritical_amount" sum="Theoretical Amount" optional="show"/>
+                    <field name="percentage"  widget="percentage" />
+                    <field name="remarks" optional="hide"/>
+                    <button type="object" name="action_open_budget_entries" string="Entries..."
+                                            icon="fa-arrow-circle-o-right"/>
+                    <field name="is_above_budget" invisible="1"/>
+                </tree>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

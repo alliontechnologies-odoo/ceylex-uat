@@ -1,0 +1,154 @@
+<data noupdate="1">
+    <record id="energy_input_energy_generated" model="energy.input">
+        <field name="name">Energy generated</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">ENGEN</field>
+    </record>
+
+    <record id="energy_input_energy_exported" model="energy.input">
+        <field name="name">Energy exported to grid</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">ENEXP</field>
+    </record>
+
+    <record id="energy_input_grid_failure" model="energy.input">
+        <field name="name">Grid failure duration</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">GRFAILD</field>
+    </record>
+
+    <record id="energy_input_average_irradiance" model="energy.input">
+        <field name="name">Average Irradiance</field>
+        <field name="uom_id" ref="product_uom_kwm"/>
+        <field name="code">AVGIRR</field>
+    </record>
+
+    <record id="energy_input_average_monthly_duration" model="energy.input">
+        <field name="name">Average monthly generation duration</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">AVGMONDUR</field>
+    </record>
+
+    <record id="energy_input_array_temperature" model="energy.input">
+        <field name="name">Array Temperature</field>
+        <field name="uom_id" ref="product_uom_celsius"/>
+        <field name="code">ARRTEMP</field>
+    </record>
+
+    <record id="energy_input_reference_temperature" model="energy.input">
+        <field name="name">Reference Temperature</field>
+        <field name="uom_id" ref="product_uom_celsius"/>
+        <field name="code">REFTEMP</field>
+    </record>
+
+    <record id="energy_input_cabling_loss" model="energy.input">
+        <field name="name">Cabling Loss</field>
+        <field name="uom_id" ref="product_uom_kwh"/>
+        <field name="code">CABLOSS</field>
+    </record>
+
+    <record id="energy_input_loss_faulty_equip" model="energy.input">
+        <field name="name">Loss due to faulty equipment</field>
+        <field name="uom_id" ref="product_uom_kwh"/>
+        <field name="code">LOSSEQUIP</field>
+    </record>
+
+    <record id="energy_input_loss_to_grid_fail" model="energy.input">
+        <field name="name">Loss due to grid failure</field>
+        <field name="uom_id" ref="product_uom_kwh"/>
+        <field name="code">LOSSGRID</field>
+    </record>
+
+    <record id="energy_input_loss_to_maintain" model="energy.input">
+        <field name="name">Loss due to maintenance</field>
+        <field name="uom_id" ref="product_uom_kwh"/>
+        <field name="code">LOSSMAIN</field>
+    </record>
+
+    <record id="energy_input_plant_summery_of_month" model="energy.input">
+        <field name="name">Plant operation summary for the month</field>
+        <field name="uom_id" ref="product_uom_kwh"/>
+        <field name="code">PLANTSUM</field>
+    </record>
+
+
+
+
+    <record id="energy_input_machine_down_time" model="energy.input">
+        <field name="name">Machine down time</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">DOWNTIME</field>
+    </record>
+
+    <record id="energy_input_internal_fault" model="energy.input">
+        <field name="name">Internal Fault</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">INTFAULT</field>
+    </record>
+
+    <record id="energy_input_preventive_maintenance" model="energy.input">
+        <field name="name">Preventive Maintenance</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">PRMAIN</field>
+    </record>
+
+    <record id="energy_input_corrective_maintenance" model="energy.input">
+        <field name="name">Corrective Maintenance</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">CRRMAIN</field>
+    </record>
+
+    <record id="energy_input_force_majeure" model="energy.input">
+        <field name="name">Force Majeure</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">FORMAJ</field>
+    </record>
+
+    <record id="energy_input_ceb_interruption" model="energy.input">
+        <field name="name">CEB Interruptions</field>
+        <field name="uom_id" ref="uom.product_uom_hour"/>
+        <field name="code">CEBINTER</field>
+    </record>
+
+    <record id="energy_input_cable_loss" model="energy.input">
+        <field name="name">Cable Loss</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">CABLELOSS</field>
+    </record>
+
+    <record id="energy_input_auxiliary_consumption" model="energy.input">
+        <field name="name">Auxiliary Consumption</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">AUXCONS</field>
+    </record>
+
+    <record id="energy_input_loss_due_to_force" model="energy.input">
+        <field name="name">Loss due to force majeure</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">LOSSMAJ</field>
+    </record>
+
+    <record id="energy_input_loss_due_to_failure_mwh" model="energy.input">
+        <field name="name">Loss due to grid failure </field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">LOSSFAILM</field>
+    </record>
+
+    <record id="energy_input_loss_preventive_maintain_mwh" model="energy.input">
+        <field name="name">Loss due to preventive maintenance </field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">LOSSPRMAIN</field>
+    </record>
+
+    <record id="energy_input_loss_breakdown_maintain_mwh" model="energy.input">
+        <field name="name">Loss due to breakdown maintenance </field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">LOSSBRDMAIN</field>
+    </record>
+
+    <record id="energy_input_loss_upgrade_maintain_mwh" model="energy.input">
+        <field name="name">Loss due to upgrade maintenance </field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">LOSSUPGMAIN</field>
+    </record>
+</data>

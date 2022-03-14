@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_power_source,access.power.source,model_power_source,base.group_user,1,1,1,1
+access_energy_input,access.energy.input,model_energy_input,,1,1,1,1
+access_power_source_result,access.power.source.result,model_power_source_result,,1,1,1,1
+access_energy_calculation,access.energy.calculation,model_energy_calculation,,1,1,1,1
+access_energy_calculation_input,access.energy.calculation.input,model_energy_calculation_input,,1,1,1,1
+access_energy_calculation_result,access.energy.calculation.result,model_energy_calculation_result,,1,1,1,1

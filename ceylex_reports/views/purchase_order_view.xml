@@ -1,0 +1,91 @@
+<odoo>
+    <!-- inherit and add field for reports -->
+    <record id="purchase_order_form_inherit_ceylax_report" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.ceylex</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="supplier_contact_id" />
+                <field name="company_contact_ids" widget="many2many_tags"/>
+            </field>
+            <field name="date_order" position="after">
+                <field name="quote_date"/>
+            </field>
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page string="Report">
+                    <group string="Delivery">
+                        <group>
+                            <field name="delivery_period" options="{'no_edit': True, 'no_create': True,}"/>
+                            <field name="delivery_term" options="{'no_edit': True, 'no_create': True,}"/>
+                        </group>
+                        <group>
+                            <field name="project_name"/>
+                        </group>
+                    </group>
+                    <group >
+                        <field name="terms_and_condition_id" options="{'no_edit': True, 'no_create': True,}"/>
+                        <field name="terms_and_condition_text"  />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+    <record id="action_purchase_agreements" model="ir.actions.act_window">
+        <field name="name">Purchase Agreements</field>
+        <field name="res_model">purchase.order.agreements</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create New agreements
+              </p>
+        </field>
+    </record>
+
+
+    <record id="action_purchase_delivery_period" model="ir.actions.act_window">
+        <field name="name">Purchase Delivery Periods</field>
+        <field name="res_model">purchase.delivery.period</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="action_purchase_delivery_term" model="ir.actions.act_window">
+        <field name="name">Purchase Delivery Terms</field>
+        <field name="res_model">purchase.delivery.term</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem
+           id="menu_report_configurations"
+           name="Delivery and Agreements"
+           parent="purchase.menu_purchase_config"
+           groups="purchase.group_purchase_manager"
+           sequence="5"/>
+
+    <menuitem
+           id="menu_report_agreements"
+           name="Agreements"
+           parent="menu_report_configurations"
+           action="action_purchase_agreements"
+           sequence="1"/>
+
+    <menuitem
+           id="menu_report_purchase_delivery_period"
+           name="Delivery Period"
+           parent="menu_report_configurations"
+           action="action_purchase_delivery_period"
+           sequence="2"/>
+
+    <menuitem
+           id="menu_report_purchase_delivery_term"
+           name="Delivery Terms"
+           parent="menu_report_configurations"
+           action="action_purchase_delivery_term"
+           sequence="2"/>
+</odoo>

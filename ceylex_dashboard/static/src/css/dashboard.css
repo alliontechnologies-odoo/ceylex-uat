@@ -1,0 +1,91 @@
+.o_action_manager{
+    overflow-y: auto !important;
+    max-width:100%;
+ }
+
+.chart-container {
+    border-radius: 0.3rem;
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
+
+.chart-container h2 {
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+
+.crm_scroll_table {
+	height: 435px;
+	overflow-x: auto;
+	box-shadow: 5px 5px rgba(222, 222, 222, 1);
+}
+
+
+.crm_scroll_table thead {
+    position: sticky;
+    top: 0;
+}
+
+.crm_scroll_table .count-container {
+    height: 45px;
+    border-radius: 50px;
+    margin-right: 10px;
+
+}
+
+.crm_scroll_table .item-content ul > li {
+	font-size: 1.1rem;
+}
+.crm_scroll_table .item-company h4 {
+	background-color: #227bf0;
+	color:white;
+	padding:6px;
+	border-radius: 3px
+}
+
+.item-container {
+    background-color: var(--grey-lighter);
+    border-radius: 0.3rem;
+    padding: 1.2rem 1rem;
+    margin: 1rem auto;
+}
+
+.item-container:hover {
+    background-color: var(--grey-dark-lighter);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.energy_delivered{
+    margin: 10px;
+    border: 1px solid black;
+    padding 20px;
+}
+
+.static-widget-1 > .row{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.static-widget-1 > .row > .col-md-3{
+    display: inline-block;
+}
+
+.static-widget-2 > .row{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.static-widget-2 > .row > .col-md-2{
+    display: inline-block;
+}
+
+.widget-3 {
+    display: block;
+    overflow-y: auto;
+    white-space: nowrap;
+    height:300px
+}
+
+

@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="ceylex_template" xml:space="preserve">
+    <t t-name="CeyDashboard">
+        <div class="cey_dashboard" >
+            <div class="container-fluid o_ceylex_dashboard" >
+            </div>
+        </div>
+    </t>
+    <t t-name="MainDashboard">
+        <section class="dashboard_main_section " id="main_section_login">
+            <div class="row">
+                <div class="col-sm-12 mb-4">
+                    <div class="row mt16" >
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <h2 class="section-header">Ceylex Dashboard</h2>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4">
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="date" id="inputStartDate" class="form-control" placeholder="Start Date" t-att-value="widget.start_date"/>
+                                </div>
+                                <div class="col">
+                                    <input type="date" id="inputEndDate" class="form-control" placeholder="End Date" t-att-value="widget.end_date"/>
+                                </div>
+                                <div class="col">
+                                    <input type="button" class="btn btn-primary" id="btnSearch" value="Search" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        </section>
+    </t>
+
+    <t t-name="EnergyDelivered">
+        <section class="bg-white" >
+            <div class="row " >
+
+                <!--  __________________     Power Generation Widget  ___________________________    -->
+                <div class="col-md-4  mt64 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-12 my-3 bg-light">
+                                <h3 class="text-center text-primary">Power Generations</h3>
+                            </div>
+                        </div>
+                        <div class="crm_scroll_table my-3 bg-light">
+                            <div class="items-table">
+                                <div class="item-container">
+                                    <t t-foreach="widget.power_generations_summery" t-as="power">
+
+                                        <div class="row bg-info rounded-pill m-3" >
+                                            <div class="col-md-5 m-auto text-center">
+                                                <h4 >
+                                                    <t t-esc="power['company']"/>
+                                                    <t t-esc="widget.start_date"/>
+                                                </h4>
+                                            </div>
+                                            <div class="col-md-7 ">
+                                                <div class="item-content">
+                                                    <ul>
+                                                        <li>
+                                                            <strong>Power Generated : </strong>
+                                                            <span><t t-esc="power['power']"/></span>
+                                                        </li>
+                                                        <li>
+                                                            <strong>Power Capacity : </strong>
+                                                            <span><t t-esc="power['capacity']"/></span>
+                                                        </li>
+                                                        <li>
+                                                            <strong>Plant Factor : </strong>
+                                                            <span><t t-esc="power['plant_factor']"/></span>
+                                                        </li>
+                                                        <li>
+                                                            <strong>Period : </strong>
+                                                            <span><t t-esc="power['period']"/></span>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <!--  __________________     Widget 7  ___________________ ________    -->
+                <div class="col-md-8 col-sm-12  mt64" >
+                    <div class="row">
+                        <div class="col-md-12 my-3 bg-light">
+                            <h3 class="text-center text-primary">Project-wise energy delivered to National Grid</h3>
+                        </div>
+                    </div>
+                    <div class="row my-3 bg-light ">
+                        <t t-foreach="widget.energy_delivered" t-as="energy">
+                            <div class="col-4" >
+                                <div>
+                                    <div class="bg-secondary rounded-pill text-center p-2">
+                                        <h4><t t-esc="energy['name']"/></h4>
+                                        <strong><t t-esc="energy['total']"/></strong>
+                                    </div>
+                                </div>
+                                <table class="table mt16">
+                                    <thead >
+                                        <tr class="table-info">
+                                            <th>Month</th>
+                                            <th>Submitted Date</th>
+                                            <th>Value of Energy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="energy['record']" t-as="record">
+                                            <tr>
+                                                <td><t t-esc="record['month']"/></td>
+                                                <td><t t-esc="record['date']"/></td>
+                                                <td class="text-right"><t t-esc="record['value']"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+
+                    </div>
+
+                </div>
+
+                <!--  __________________    Widget 3  ___________________________    -->
+<!--                <div class="col-md-8 mt64 col-sm-12">-->
+<!--                    <div class="row ">-->
+<!--                        <div class="col-md-12 my-3 bg-light">-->
+<!--                            <h1 class="text-center text-primary">Widget 3</h1>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-12 my-3 bg-light ">-->
+<!--                            <div class="row" >-->
+<!--                                <table class="table table-bordered" style="margin-right:10px;">-->
+<!--                                    <thead>-->
+<!--                                        <tr class="bg-info text-white"><th colspan="5">Projects Under Construction</th></tr>-->
+<!--                                        <tr class="bg-info text-white">-->
+<!--                                            <th width="20%">Project Name</th>-->
+<!--                                            <th width="20%">Budgeted Project Cost</th>-->
+<!--                                            <th width="20%">Amount Spent</th>-->
+<!--                                            <th width="20%">Equity</th>-->
+<!--                                            <th width="20%">Debt</th>-->
+<!--                                        </tr>-->
+<!--                                    </thead>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                            <div class="row widget-3">-->
+<!--                                <table class="table table-bordered">-->
+<!--                                   <tr>-->
+<!--                                        <td width="20%" class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td width="20%" class="text-right">1000</td>-->
+<!--                                        <td width="20%" class="text-right">3000</td>-->
+<!--                                        <td width="20%" class="text-right">400</td>-->
+<!--                                        <td width="20%" class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td class="text-left">CSP - Ihalawewa</td>-->
+<!--                                        <td class="text-right">1000</td>-->
+<!--                                        <td class="text-right">3000</td>-->
+<!--                                        <td class="text-right">400</td>-->
+<!--                                        <td class="text-right">500</td>-->
+<!--                                    </tr>-->
+<!--                                </table>-->
+
+<!--                            </div>-->
+<!--                            <div class="row">-->
+<!--                                <table class="table table-bordered" style="margin-right:10px;">-->
+<!--                                    <tfoot>-->
+<!--                                        <tr class="bg-secondary text-white">-->
+<!--                                            <td width="20%" class="text-left">Total</td>-->
+<!--                                            <td width="20%" class="text-right">1000</td>-->
+<!--                                            <td width="20%" class="text-right">3000</td>-->
+<!--                                            <td width="20%" class="text-right">400</td>-->
+<!--                                            <td width="20%" class="text-right">500</td>-->
+<!--                                        </tr>-->
+<!--                                    </tfoot>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+<!--                </div>-->
+
+                <!--  __________________     Widget 1  ___________________________    -->
+<!--                <div class="col-md-12 widget-1 mt64 bg-light" >-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12 my-3">-->
+<!--                            <h1 class="text-center text-primary">Widget 1</h1>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row  py-3">-->
+<!--                        <div class="col-md-2 col header-widget" style="position:sticky">-->
+<!--                            <table class="table table-bordered">-->
+<!--                                <thead class="table-borderless">-->
+<!--                                    <tr style="border:1px solid white;">-->
+<!--                                        <th style="border:1px solid white;"><![CDATA[&nbsp;]]></th>-->
+<!--                                    </tr>-->
+<!--                                    <tr style="border:1px solid white;">-->
+<!--                                        <th style="border:1px solid white;"><![CDATA[&nbsp;]]></th>-->
+<!--                                    </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody class="bg-info">-->
+<!--                                    <tr><td>Revenue</td></tr>-->
+<!--                                    <tr><td>Gross Profit</td></tr>-->
+<!--                                    <tr><td>GP %</td></tr>-->
+<!--                                    <tr><td>Other Income</td></tr>-->
+<!--                                    <tr><td>NPAT</td></tr>-->
+<!--                                    <tr><td>NPAT %</td></tr>-->
+
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-10 static-widget-1">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-3">-->
+<!--                            <table class="table table-bordered">-->
+<!--                                <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th colspan="2"  class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <th class="text-center">Current Year</th>-->
+<!--                                        <th class="text-center">Last Year</th>-->
+<!--                                    </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                    <tr>-->
+<!--                                        <td>200</td>-->
+<!--                                        <td>300</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>200</td>-->
+<!--                                        <td>300</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>200</td>-->
+<!--                                        <td>300</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>200</td>-->
+<!--                                        <td>300</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>200</td>-->
+<!--                                        <td>300</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>200</td>-->
+<!--                                        <td>300</td>-->
+<!--                                    </tr>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                                <div class="col-md-3">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th colspan="2"  class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th class="text-center">Current Year</th>-->
+<!--                                                <th class="text-center">Last Year</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-3">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th colspan="2"  class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th class="text-center">Current Year</th>-->
+<!--                                                <th class="text-center">Last Year</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-3">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th colspan="2"  class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th class="text-center">Current Year</th>-->
+<!--                                                <th class="text-center">Last Year</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-3">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th colspan="2"  class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th class="text-center">Current Year</th>-->
+<!--                                                <th class="text-center">Last Year</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-3">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th colspan="2"  class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th class="text-center">Current Year</th>-->
+<!--                                                <th class="text-center">Last Year</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>200</td>-->
+<!--                                                <td>300</td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!--  __________________     Widget 2  ___________________________    -->
+
+<!--                 <div class="col-md-12 widget-2 mt64 bg-light">-->
+<!--                     <div class="row">-->
+<!--                        <div class="col-md-12 my-3">-->
+<!--                            <h1 class="text-center text-primary">Widget 2</h1>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row  py-3">-->
+<!--                        <div class="col-md-2 header-widget" style="position:sticky">-->
+<!--                            <table class="table table-bordered">-->
+<!--                                <thead class="table-borderless">-->
+<!--                                    <tr style="border:1px solid white;">-->
+<!--                                        <th style="border:1px solid white;"><![CDATA[&nbsp;]]></th>-->
+<!--                                    </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody class="bg-info">-->
+<!--                                    <tr><td>Debtors Outstanding</td></tr>-->
+<!--                                    <tr><td>Cash position</td></tr>-->
+<!--                                    <tr><td>Loan Positon</td></tr>-->
+<!--                                    <tr><td>Revenue Collected/Received</td></tr>-->
+<!--                                    <tr><td>Loans Repaid</td></tr>-->
+<!--                                    <tr><td>Loan Interest</td></tr>-->
+<!--                                    <tr><td>O<![CDATA[&mp;]]>M Expenses</td></tr>-->
+<!--                                    <tr><td>Surplus of Collections over <br/>Loan Repayments O<![CDATA[&mp;]]>M </td></tr>-->
+
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-10 static-widget-2">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-2">-->
+<!--                                    <table class="table table-bordered">-->
+<!--                                        <thead>-->
+<!--                                            <tr>-->
+<!--                                                <th   class="text-center bg-info">Ceylex Renewables</th>-->
+<!--                                            </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200</td></tr>-->
+<!--                                            <tr><td class="text-center">200<br/> <![CDATA[&nbsp;]]></td></tr>-->
+
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+
+
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+            </div>
+        </section>
+
+    </t>
+    <t t-name="InvoiceReportMenu">
+        <section>
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 profit_and_loss" >
+                    <div class="card report_card" >
+                        <div id="" class="collapse show bg-info">
+                            <div class="card-body text-center">
+                                <a href="#"><h2>Profit and Loss</h2></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 aged_receivable" >
+                    <div class="card report_card" >
+                        <div id="" class="collapse show bg-warning">
+                            <div class="card-body text-center">
+                                <a href="#"><h2>Aged Receivable</h2></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 cash_flow_statement" >
+                    <div class="card report_card">
+                        <div id="" class="collapse show bg-success">
+                            <div class="card-body text-center">
+                                <a href="#"><h2>Cash Flow Statement</h2></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 executive_summery report_card" >
+                    <div class="card report_card" >
+                        <div id="" class="collapse show bg-secondary">
+                            <div class="card-body text-center">
+                                <a href="#"><h2>Executive Summary</h2></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+
+    <!--  POWER GENERATION SUMMAR  -->
+
+</templates>

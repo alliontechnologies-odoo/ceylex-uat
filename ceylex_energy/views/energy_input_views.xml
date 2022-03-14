@@ -1,0 +1,35 @@
+<odoo>
+
+
+    <record id="view_energy_input_tree" model="ir.ui.view">
+        <field name="name">energy.input.tree</field>
+        <field name="model">energy.input</field>
+        <field name="arch" type="xml">
+            <tree string="Energy Inputs" editable="top">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="uom_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_energy_input_menu" model="ir.actions.act_window">
+        <field name="name">Energy Input</field>
+        <field name="res_model">energy.input</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Add a new Power Source
+              </p>
+        </field>
+    </record>
+
+
+    <menuitem
+           id="menu_energy_input"
+           name="Energy Input"
+           parent="menu_ceylex_configurations_"
+           action="action_energy_input_menu"
+           sequence="99"/>
+</odoo>

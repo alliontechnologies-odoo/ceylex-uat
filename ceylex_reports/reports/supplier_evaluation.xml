@@ -1,0 +1,289 @@
+<odoo>
+    <data>
+
+        <!--    Supplier Evaluation    -->
+        <template id="report_supplier_evaluation_ceylex_doc" >
+
+            <div class="header" style=" font-size:12px;">
+                <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+            </div>
+            <div class="article cus_table" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="font-size:12px;">
+                <span class="mt-2"><t t-esc="o.name" /></span>
+                <div class="row cus_table" style="border: 1px solid black; ">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 mt-1">
+                                <h6>SUPPLIER EVALUATION REPORT-MAJOR SUPPLIERS</h6>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-1">
+                                Date:
+                            </div>
+                            <div class="col-11">
+                               <t t-esc="o.date"/>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-6">
+                                Component/System to be purchased:
+                            </div>
+                            <div class="col-6">
+                                 <t t-esc="o.to_be_purchased"/>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-1">
+                                Supplier's Name  :
+                            </div>
+                            <div class="col-11">
+                                 <t t-esc="o.partner_id.name"/>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <u><strong><b>Critical Parameters</b></strong></u>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-6">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="width:30%">Delivery</td>
+                                        <td style="width:70%">
+                                            <div class="row">
+                                                    <div class="col-4">Acceptable</div>
+                                                    <div class="col-8">
+                                                        <t t-if="o.delivery=='accept'">
+                                                             <input type="checkbox" checked="checked"/>
+                                                        </t>
+                                                        <t t-elif="o.delivery=='notAccept'">
+                                                             <input type="checkbox" />
+                                                        </t>
+                                                    </div>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td> <![CDATA[&nbsp;]]> </td>
+                                        <td>
+                                            <div class="row">
+                                                 <div class="col-4">Not Acceptable</div>
+                                                 <div class="col-8">
+                                                     <t t-if="o.delivery=='accept'">
+                                                         <input type="checkbox" />
+                                                     </t>
+                                                     <t t-elif="o.delivery=='notAccept'">
+                                                          <input type="checkbox" checked="checked" />
+                                                     </t>
+                                                 </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="width:30%">Technical Compliance</td>
+                                        <td style="width:70%">
+                                            <div class="row">
+                                                 <div class="col-4"> Acceptable</div>
+                                                 <div class="col-8">
+                                                     <t t-if="o.technical_compliance=='accept'">
+                                                             <input type="checkbox" checked="checked"/>
+                                                        </t>
+                                                        <t t-elif="o.technical_compliance=='notAccept'">
+                                                             <input type="checkbox" />
+                                                        </t>
+                                                 </div>
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td>
+                                            <div class="row">
+                                                 <div class="col-4">Not Acceptable</div>
+                                                 <div class="col-8">
+                                                     <t t-if="o.technical_compliance=='accept'">
+                                                             <input type="checkbox" />
+                                                        </t>
+                                                        <t t-elif="o.technical_compliance=='notAccept'">
+                                                             <input type="checkbox" checked="checked" />
+                                                        </t>
+                                                 </div>
+                                            </div>
+
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <u><strong><b>Capability Assessment  :</b></strong></u>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <table style="width:100%; border: 1px solid black;">
+                                    <thead>
+                                        <tr style="background:black; color:white;">
+                                            <th style="width:10%">No</th>
+                                            <th style="width:60%">Consideration</th>
+                                            <th style="width:10%">Marks</th>
+                                            <th style="width:10%; padding:5px" >Weight <br/>Factor</th>
+                                            <th style="width:10%">Score <br/> <small>Marks x W,F</small></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="category" t-value=""/>
+                                        <t t-foreach="o.line_ids.sorted(key=lambda l: l.sequence)" t-as="line">
+
+                                            <t t-if="category != line.category_id.id">
+                                                <tr t-if="line.sequence != 1">
+                                                    <td class="text-right"><![CDATA[&nbsp;]]></td>
+                                                    <td class="text-left"/>
+                                                    <td class="text-right"/>
+                                                    <td class="text-right" style="padding: 3px; background:#a7a8a7; border:1px solid black"/>
+                                                    <td class="text-right"/>
+                                                </tr>
+                                                <tr style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px dotted black;">
+                                                    <td class="text-right" style="padding: 3px; background:#dbdbdb; border:1px dotted black"><t t-esc="line.sequence"/></td>
+                                                    <td class="text-left" style="padding: 3px; background:#dbdbdb; border:1px dotted black"><t t-esc="line.category_id.name"/></td>
+                                                    <td class="text-right" style="padding: 3px; border:1px dotted black">
+                                                        <t t-if="line.description">
+
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="line.marks" />
+                                                        </t>
+                                                    </td>
+                                                    <td class="text-right" style="padding: 3px; background:#a7a8a7; border:1px dotted black">
+                                                        <t  t-if="line.description">
+                                                        </t>
+                                                        <t  t-else="">
+                                                            <span t-esc="line.weight_factor" />
+                                                        </t>
+                                                    </td>
+                                                    <td class="text-right" style="padding: 3px; border:1px dotted black">
+                                                         <t  t-if="line.description">
+                                                        </t>
+                                                        <t  t-else="">
+                                                            <span t-esc="line.score" />
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <t t-if="line.description">
+                                                    <tr style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px dotted black;">
+                                                        <td class="text-right" style="padding: 3px;  border:1px dotted black"/>
+                                                        <td class="text-left" style="padding-left:15px"><t t-esc="line.description"/></td>
+                                                        <td class="text-right" style="padding: 3px; border:1px dotted black"><t t-esc="line.marks"/></td>
+                                                        <td class="text-right" style="padding: 3px; background:#a7a8a7; border:1px solid black"><t t-esc="line.weight_factor"/></td>
+                                                        <td class="text-right" style="padding: 3px; border:1px dotted black"><t t-esc="line.score"/></td>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <tr style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px dotted black;">
+                                                    <td class="text-right" style="padding: 3px;  border:1px dotted black"/>
+                                                    <td class="text-left" style="padding-left:15px"><t t-esc="line.description"/></td>
+                                                    <td class="text-right" style="padding: 3px; border:1px dotted black"><t t-esc="line.marks"/></td>
+                                                    <td class="text-right" style="padding: 3px; background:#a7a8a7; border:1px solid black"><t t-esc="line.weight_factor"/></td>
+                                                    <td class="text-right" style="padding: 3px; border:1px dotted black"><t t-esc="line.score"/></td>
+                                                </tr>
+                                            </t>
+                                            <t t-set="category" t-value="line.category_id.id"/>
+                                        </t>
+                                        <tr style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px dotted black;">
+                                            <td class="text-right"><![CDATA[&nbsp;]]></td>
+                                            <td class="text-left"/>
+                                            <td class="text-right"/>
+                                            <td class="text-right"/>
+                                            <td class="text-right"/>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">Score</td>
+                                            <td class="text-right"><t t-esc="o.total"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12" >
+                                <u><strong><b>Recommendation / Remarks:</b></strong></u>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4" style="margin:10px">
+                            <div class="col-12" style="border:1px solid black; min-height:180px; ">
+                                <t t-esc="o.remarks"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12" >
+                                <u><strong><b>Recommendation Committee:</b></strong></u>
+                            </div>
+                        </div>
+
+                        <div class="row " style="margin:10px">
+                            <div class="col-12" >
+                               <table class="table" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Signature</th>
+                                        </tr>
+                                    </thead>
+                                   <tbody>
+                                       <tr t-foreach="o.recommendation_committee" t-as="emp">
+                                           <td><t t-esc="emp.name"/></td>
+                                           <td><t t-esc="emp.job_title"/></td>
+                                           <td>
+                                               <![CDATA[&nbsp;]]>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <span style="padding-top:5px">Revision <t t-esc="'%02d' % (o.revision_no)" />:<t t-esc="o.revision_date" /></span>
+
+            </div>
+        </template>
+
+
+        <template id="report_supplier_evaluation_ceylex">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="ceylex_reports.report_supplier_evaluation_ceylex_doc" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_supplier_report_menu" model="ir.actions.report">
+            <field name="name">SUPPLIER EVALUATION REPORT</field>
+            <field name="model">supplier.rating</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ceylex_reports.report_supplier_evaluation_ceylex</field>
+            <field name="report_file">ceylex_reports.report_supplier_evaluation_ceylex</field>
+            <field name="print_report_name">'Supplier evaluation'</field>
+            <field name="paperformat_id" ref="ceylex_reports.ceylex_a4_format_no_margin"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

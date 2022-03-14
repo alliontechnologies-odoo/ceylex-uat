@@ -1,0 +1,14 @@
+<odoo>
+
+    <record id="action_ceylax_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">ceylex_dashboard</field>
+    </record>
+
+    <menuitem name="Ceylex Dashboard"
+            id="menu_ceylex_dashboard"
+            parent="ceylex_energy.main_menu_ceylex"
+            action="action_ceylax_dashboard"
+            sequence="1"
+        />
+</odoo>

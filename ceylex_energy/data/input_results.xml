@@ -1,0 +1,235 @@
+<data noupdate="1">
+<!--    Solar Power System-->
+
+    <record id="power_system_solar" model="power.source">
+        <field name="name">SOLAR POWER PLANTS</field>
+        <field name="energy_input_ids"
+               eval="[
+                (4,ref('energy_input_energy_generated')),
+                (4,ref('energy_input_energy_exported')),
+                (4,ref('energy_input_grid_failure')),
+                (4,ref('energy_input_average_irradiance')),
+                (4,ref('energy_input_average_monthly_duration')),
+                (4,ref('energy_input_array_temperature')),
+                (4,ref('energy_input_reference_temperature')),
+                (4,ref('energy_input_cabling_loss')),
+                (4,ref('energy_input_loss_faulty_equip')),
+                (4,ref('energy_input_loss_to_grid_fail')),
+                (4,ref('energy_input_loss_to_maintain'))
+               ]
+        "/>
+    </record>
+
+    <record id="result_solar_energy_generated" model="power.source.result">
+        <field name="name">Energy generated</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_energy_exported" model="power.source.result">
+        <field name="name">Energy exported to the grid</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_plant_factor" model="power.source.result">
+        <field name="name">Plant Factor</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">amount= (ENEXP/(record.installed_capacity * record.total_hours)) * 100</field>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_grid_availability" model="power.source.result">
+        <field name="name">Grid Availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">amount= (1- (GRFAILD / record.total_hours)) * 100</field>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_performance_ration" model="power.source.result">
+        <field name="name">Performance Ratio</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">amount= (ENGEN / (record.installed_capacity * AVGIRR * AVGMONDUR) )*100</field>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_temperature_performance" model="power.source.result">
+        <field name="name">Temperature Corrected Performance Ratio</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">
+temperature_corr = 1 - ( (company.temperature_coefficient/100) * (ARRTEMP -REFTEMP) )
+amount= (ENGEN / (record.installed_capacity * temperature_corr * AVGIRR * AVGMONDUR) )*100</field>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_internal_loses" model="power.source.result">
+        <field name="name">Internal Losses</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">
+amount= CABLOSS + LOSSEQUIP
+        </field>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+    <record id="result_solar_external_loses" model="power.source.result">
+        <field name="name">External Losses</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">
+amount= LOSSGRID + LOSSMAIN
+        </field>
+        <field name="power_source_id" ref="power_system_solar"/>
+    </record>
+
+
+
+    <!--    Wind Power System-->
+
+    <record id="power_system_wind" model="power.source">
+        <field name="name">WIND POWER PLANTS</field>
+        <field name="energy_input_ids"
+               eval="[
+                (4,ref('energy_input_energy_generated')),
+                (4,ref('energy_input_energy_exported')),
+                (4,ref('energy_input_grid_failure')),
+                (4,ref('energy_input_machine_down_time')),
+                (4,ref('energy_input_internal_fault')),
+                (4,ref('energy_input_corrective_maintenance')),
+                (4,ref('energy_input_preventive_maintenance')),
+                (4,ref('energy_input_force_majeure')),
+                (4,ref('energy_input_ceb_interruption')),
+                (4,ref('energy_input_cable_loss')),
+                (4,ref('energy_input_auxiliary_consumption')),
+                (4,ref('energy_input_loss_to_grid_fail')),
+                (4,ref('energy_input_loss_due_to_force')),
+                (4,ref('energy_input_loss_preventive_maintain_mwh')),
+                (4,ref('energy_input_loss_breakdown_maintain_mwh')),
+                (4,ref('energy_input_loss_upgrade_maintain_mwh')),
+               ]
+        "/>
+    </record>
+
+     <record id="result_wind_energy_generated" model="power.source.result">
+        <field name="name">Energy generated</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+    <record id="result_wind_energy_exported" model="power.source.result">
+        <field name="name">Energy exported to the grid</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+    <record id="result_wind_plant_factor" model="power.source.result">
+        <field name="name">Plant Factor</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">amount= (ENEXP/(record.installed_capacity * record.total_hours)) * 100</field>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+    <record id="result_wind_grid_availability" model="power.source.result">
+        <field name="name">Grid Availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">amount= (1 - (GRFAILD/record.total_hours)) * 100 </field>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+    <record id="result_wind_machine_availability" model="power.source.result">
+        <field name="name">Machine availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">amount= (1 - (DOWNTIME/record.total_hours)) * 100 </field>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+    <record id="result_wind_plant_availability" model="power.source.result">
+        <field name="name">Plant availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+        <field name="code">
+T1 = CRRMAIN + CEBINTER + PRMAIN + FORMAJ
+T2 = CEBINTER + PRMAIN + FORMAJ
+amount= ((record.total_hours - T1) / (record.total_hours- T2)) * 100
+
+        </field>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+    <record id="result_wind_total_energy_loss" model="power.source.result">
+        <field name="name">Total Energy Loss due to unavailability and internal factors</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="code">
+internal = LOSSGRID + CABLELOSS + AUXCONS + LOSSMAJ
+unavailable = LOSSPRMAIN + LOSSBRDMAIN + LOSSUPGMAIN
+amount= internal + unavailable
+
+        </field>
+        <field name="power_source_id" ref="power_system_wind"/>
+    </record>
+
+
+
+    <!--    Hydro Power System-->
+
+    <record id="power_system_hydro" model="power.source">
+        <field name="name">HYDRO POWER PLANTS</field>
+        <field name="energy_input_ids"
+               eval="[
+                (4,ref('energy_input_energy_generated')),
+                (4,ref('energy_input_energy_exported')),
+                (4,ref('energy_input_grid_failure')),
+                (4,ref('energy_input_machine_down_time')),
+                (4,ref('energy_input_internal_fault')),
+                (4,ref('energy_input_corrective_maintenance')),
+                (4,ref('energy_input_preventive_maintenance')),
+                (4,ref('energy_input_force_majeure')),
+                (4,ref('energy_input_ceb_interruption')),
+               ]
+        "/>
+    </record>
+
+
+     <record id="result_hydro_energy_generated" model="power.source.result">
+        <field name="name">Energy generated</field>
+         <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="power_source_id" ref="power_system_hydro"/>
+    </record>
+
+    <record id="result_hydro_energy_exported" model="power.source.result">
+        <field name="name">Energy exported to the grid</field>
+        <field name="uom_id" ref="product_uom_mwh"/>
+        <field name="power_source_id" ref="power_system_hydro"/>
+    </record>
+
+    <record id="result_hydro_plant_factor" model="power.source.result">
+        <field name="name">Plant Factor</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+         <field name="code">amount= (ENEXP/(record.installed_capacity * record.total_hours)) * 100</field>
+        <field name="power_source_id" ref="power_system_hydro"/>
+    </record>
+
+    <record id="result_hydro_grid_availability" model="power.source.result">
+        <field name="name">Grid availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+         <field name="code">amount= (1 - (GRFAILD / record.total_hours)) * 100</field>
+        <field name="power_source_id" ref="power_system_hydro"/>
+    </record>
+
+    <record id="result_hydro_machine_availability" model="power.source.result">
+        <field name="name">Machine availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+         <field name="code">amount= (1 - (DOWNTIME / record.total_hours)) * 100</field>
+        <field name="power_source_id" ref="power_system_hydro"/>
+    </record>
+
+    <record id="result_hydro_plant_availability" model="power.source.result">
+        <field name="name">Plant availability</field>
+        <field name="uom_id" ref="product_uom_percentage"/>
+         <field name="code">
+T1 = CRRMAIN + CEBINTER + PRMAIN + FORMAJ
+T2 = CEBINTER + PRMAIN + FORMAJ
+amount= ((record.total_hours - T1) / (record.total_hours- T2)) * 100
+
+         </field>
+        <field name="power_source_id" ref="power_system_hydro"/>
+    </record>
+
+</data>
