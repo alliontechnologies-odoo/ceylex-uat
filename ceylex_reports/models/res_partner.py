@@ -51,6 +51,6 @@ class AccountPayment(models.Model):
 
     def action_post(self):
         """Block the payment when there is a pending vendor evaluations"""
-        if self.is_rating_supplier and self.partner_id.pending_evaluation:
+        if self.partner_id.is_rating_supplier and self.partner_id.pending_evaluation:
             raise ValidationError("Supplier evaluation is pending. Please complete the evaluation to proceed")
         return super(AccountPayment, self).action_post()
