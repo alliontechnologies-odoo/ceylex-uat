@@ -54,6 +54,9 @@ class EnergyCalculation(models.Model):
 
         # Update plant Factor
         for line in power:
-            plant_factor = (line['power'] / (line['capacity'] * line['total_hours'])) * 100
+            if line['power'] > 0 and line['capacity'] > 0 and line['total_hours']:
+                plant_factor = (line['power'] / (line['capacity'] * line['total_hours'])) * 100
+            else:
+                plant_factor = 0.00
             line['plant_factor'] = f"{plant_factor:,.2f}"
         return {'power': power}
