@@ -25,7 +25,7 @@ class PurchaseOrder(models.Model):
 
     def button_confirm(self):
         """Check is there a pending evaluation for this vendor"""
-        if self.is_rating_supplier and self.partner_id.pending_evaluation:
+        if self.partner_id.is_rating_supplier and self.partner_id.pending_evaluation:
             raise ValidationError("Supplier evaluation is pending. Please complete the evaluation to proceed")
         return super(PurchaseOrder, self).button_confirm()
 
