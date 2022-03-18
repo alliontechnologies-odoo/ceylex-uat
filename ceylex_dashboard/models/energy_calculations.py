@@ -58,5 +58,6 @@ class EnergyCalculation(models.Model):
                 plant_factor = (line['power'] / (line['capacity'] * line['total_hours'])) * 100
             else:
                 plant_factor = 0.00
+
             line['plant_factor'] = f"{plant_factor:,.2f}"
         return {'power': power}
