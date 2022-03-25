@@ -14,7 +14,7 @@
                 <xpath expr="//group[@name='purchase']" position="inside">
                     <field name="is_rating_supplier"/>
                     <field name="evaluation_repeat"  attrs="{'invisible':[('is_rating_supplier','=', False)]}" />
-                    <field name="next_evaluation_date" readonly="1" attrs="{'invisible':[('is_rating_supplier','=', False)]}" />
+                    <field name="next_evaluation_date" attrs="{'invisible':[('is_rating_supplier','=', False)]}" />
                     <field name="pending_evaluation" invisible="1"/>
                 </xpath>
 
