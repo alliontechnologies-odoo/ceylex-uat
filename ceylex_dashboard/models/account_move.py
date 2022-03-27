@@ -43,15 +43,10 @@ class AccountMove(models.Model):
             energy[index]['record'].append({
                 'month': MONTH_LIST[int(rec[3])-1][1] + "-" + rec[4],
                 'date': rec[6],
-                'value': f"{rec[9]:,.2f}"
+                'value': f"{rec[5]:,.2f}"
             })
             total = float(energy[index]['total'].replace(',', ''))
-            total += rec[9]
+            total += rec[5]
             energy[index]['total'] = f"{total:,.2f}"
 
         return {'energy': energy}
-
-
-
-
-

@@ -21,7 +21,7 @@ class EnergyCalculation(models.Model):
 
         """
         if start_date and end_date:
-            calculations = self.search([('start_date', '>=', start_date), ('end_date', '<=', end_date)], order='company_id desc, year asc, month desc')
+            calculations = self.search([('start_date', '>=', start_date), ('end_date', '<=', end_date), ('state', '=', 'confirmed')], order='company_id desc, year asc, month desc')
         else:
             calculations = self.search([], order='company_id desc, year asc, month desc')
         power = []
@@ -54,7 +54,7 @@ class EnergyCalculation(models.Model):
 
         # Update plant Factor
         for line in power:
-            if line['power'] > 0 and line['capacity'] > 0 and line['total_hours']:
+            if line.get('power') > 0 and line.get('capacity') > 0 and line.get('total_hours'):
                 plant_factor = (line['power'] / (line['capacity'] * line['total_hours'])) * 100
             else:
                 plant_factor = 0.00
