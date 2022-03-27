@@ -31,7 +31,7 @@
                 <field name="svat" attrs="{'invisible': [('vat_type', '!=', 's_vat')]}"/>
             </field>
             <field name="ref" position="after">
-                <field name="report_vat_type" attrs="{'invisible': [('move_type', '=', 'out_refund')]}"/>
+                <field name="vat_type" attrs="{'invisible': [('move_type', '=', 'out_refund')]}"/>
             </field>
         </field>
     </record>
